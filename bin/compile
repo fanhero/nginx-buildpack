@@ -15,15 +15,14 @@ cp config/mime.types "$1/config/"
 echo '-----> nginx-buildpack: Default mime.types copied to app/config/'
 
 if [[ ! -f $1/config/nginx.conf.erb ]]; then
-	export PM2_PORT="$(($PORT + 1))"
 	cp config/nginx.conf.erb "$1/config/"
-	echo '-----> Nginx Port: $PORT'
-	echo '-----> PM2 Port: $PM2_PORT'
+	echo '-----> Nginx Port: ' && echo '$PORT'
+	echo '-----> PM2 Port: ' && echo '$PM2_PORT'
 	echo '-----> nginx-buildpack: Default config copied to app/config.'
 else
 	export PM2_PORT="$(($PORT + 1))"
-	echo '-----> Nginx Port: $PORT'
-	echo '-----> PM2 Port: $PM2_PORT'
+	echo '-----> Nginx Port: ' && echo '$PORT'
+	echo '-----> PM2 Port: ' && echo '$PM2_PORT'
 	echo '-----> nginx-buildpack: Custom config found in app/config.'
 fi
 exit 0
