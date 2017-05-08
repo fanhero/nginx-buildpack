@@ -5,6 +5,9 @@ rm -f $psmgr
 mkfifo $psmgr
 
 #Evaluate config to get $PORT
+export PM2_PORT="$(($PORT + 1))"
+echo '-----> Nginx Port: ' && echo $PORT
+echo '-----> PM2 Port: ' && echo $PM2_PORT
 erb config/nginx.conf.erb > config/nginx.conf
 
 n=1
@@ -55,10 +58,6 @@ fi
 #Start NGINX
 (
 	#We expect nginx to run in foreground.
-	#We also expect a socket to be at /tmp/nginx.socket.
-    export PM2_PORT="$(($PORT + 1))"
-	echo '-----> Nginx Port: ' && echo $PORT
-	echo '-----> PM2 Port: ' && echo $PM2_PORT
 	echo 'buildpack=nginx at=nginx-start'
 	bin/nginx -p . -c config/nginx.conf
 	echo 'nginx' >$psmgr
