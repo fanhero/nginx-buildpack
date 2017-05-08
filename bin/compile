@@ -21,8 +21,8 @@ if [[ ! -f $1/config/nginx.conf.erb ]]; then
 	echo '-----> nginx-buildpack: Default config copied to app/config.'
 else
 	export PM2_PORT="$(($PORT + 1))"
-	echo '-----> Nginx Port: ' && echo '$PORT'
-	echo '-----> PM2 Port: ' && echo '$PM2_PORT'
+	echo '-----> Nginx Port: ' && echo $PORT
+	echo '-----> PM2 Port: ' && echo $PM2_PORT
 	echo '-----> nginx-buildpack: Custom config found in app/config.'
 fi
 exit 0
